@@ -218,3 +218,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Secrets: never commit
+.env
+profiles.yml
+*credentials*.json
+gcp-key*.json
+*.pem
+
+# Terraform state (contains sensitive info)
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Data files (too big for GitHub)
+*.csv
+*.csv.gz
+*.parquet
