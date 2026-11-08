@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: zoomcamp
+    description: Raw NYC taxi trip data loaded into BigQuery by Kestra (green) and a bulk GCS load (yellow).
+    database: double-reef-370319
+    schema: zoomcamp
+    tables:
+      - name: green_tripdata
+        description: Raw green taxi trips, 2019 to 2020, partitioned by pickup date.
+      - name: yellow_tripdata
+        description: Raw yellow taxi trips, 2019 to 2020 plus March 2021, partitioned by pickup date.

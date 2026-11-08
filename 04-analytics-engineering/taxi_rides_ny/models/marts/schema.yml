@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: dim_zones
+    description: NYC TLC taxi zones (from the taxi_zone_lookup seed). One row per zone.
+    columns:
+      - name: location_id
+        description: TLC zone ID; joins to pickup_location_id and dropoff_location_id in fct_trips.
+        data_tests:
+          - unique
+          - not_null
+      - name: service_zone
+        description: Zone type (Yellow Zone, Green Zone, Airports, EWR).
+
+  - name: fct_trips
+    description: >
+      Green and yellow taxi trips with pickup and dropoff zone names and payment descriptions.
+      Grain: one row per trip. Partitioned by month on pickup_datetime; clustered by service_type and pickup_location_id.
+    columns:
+      - name: trip_id
+        description: MD5 hash used as the trip key.
+        data_tests:
+          - not_null
+          - unique:
+              config:
+                severity: warn
+      - name: service_type
+        description: Green or Yellow.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Green', 'Yellow']
+      - name: pickup_location_id
+        description: TLC zone where the trip started.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_zones')
+                field: location_id
+      - name: payment_type_description
+        description: Readable payment type, produced by the get_payment_type_description macro.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Credit card', 'Cash', 'No charge', 'Dispute', 'Unknown', 'Voided trip', 'EMPTY']
+      - name: trip_distance
+        description: Trip distance in miles.
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+              config:
+                severity: warn

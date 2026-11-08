@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_green_tripdata
+    description: Cleaned green taxi trips. One row per trip, same grain as the raw table; columns renamed and cast.
+    columns:
+      - name: trip_id
+        description: MD5 hash of vendor, pickup and dropoff times and locations; used for deduplication.
+      - name: pickup_location_id
+        description: TLC taxi zone where the trip started.
+      - name: payment_type
+        description: Numeric payment code (1 credit card, 2 cash, 3 no charge, 4 dispute, 5 unknown, 6 voided).
+
+  - name: stg_yellow_tripdata
+    description: Cleaned yellow taxi trips. One row per trip, same grain as the raw table; columns renamed and cast.
+    columns:
+      - name: trip_id
+        description: MD5 hash of vendor, pickup and dropoff times and locations; used for deduplication.

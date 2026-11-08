@@ -1,0 +1,8 @@
+[project]
+name = "04-analytics-engineering"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "dbt-bigquery>=1.12.2",
+    "dbt-core>=1.12.6",
+]
