@@ -35,7 +35,7 @@ renamed as (
         filename
 
     from source
-    where vendorid is not null
+    where vendorid is not null and filename not like 'yellow_tripdata_2021%'
 )
 
 select * from renamed
