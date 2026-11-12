@@ -1,4 +1,4 @@
-with green as (
+with green as ( 
     select
         trip_id,
         'Green' as service_type,
