@@ -234,4 +234,9 @@ gcp-key*.json
 # Data files (too big for GitHub)
 *.csv
 *.csv.gz
-*.parquet
+*.parquetlogs/
+06-batch/data/
+spark-warehouse/
+metastore_db/
+derby.log
+.ipynb_checkpoints/

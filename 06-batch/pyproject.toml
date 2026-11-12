@@ -1,0 +1,8 @@
+[project]
+name = "06-batch"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "ipykernel>=7.4.0",
+    "pyspark>=4.3.0",
+]
